@@ -1,113 +1,113 @@
-# EvidenceDesk · 可追溯知识库问答工作台
+# EvidenceDesk
 
-一个面向求职展示的完整可运行项目：上传文本 → 文档分块 → 词法检索 → 原文证据 → 可选大模型综合回答。
+**面向研究资料与技术文档的知识库问答工作台。**
 
-**当前交付为 v1.0 开发基线，未替你创建 GitHub 仓库或公网部署。** 默认不需要 API Key；配置模型后才启用生成式 RAG。示例材料均为自编教学内容，不含真实电子病历。适合围绕医疗数据研究、企业知识库与 AI 应用工程继续开发。
+EvidenceDesk将分散的文本资料组织为可检索的知识库，支持上传文档、查找相关片段、查看原文，并在配置模型服务后生成带引用的回答。适用于研究方法查询、项目文档查阅和个人知识整理。
 
-## 快速运行（Windows）
+## 功能
 
-1. 解压后，把包含 `app`、`web`、`requirements.txt` 的 `evidencedesk` 文件夹放到 `D:\AI_projects\evidencedesk`。
-2. 打开 Anaconda Prompt，执行：
+- **文档管理**：上传UTF-8编码的TXT或Markdown，按浏览器会话隔离自定义文档。
+- **知识检索**：支持BM25、TF-IDF余弦相似度及RRF融合，适用于关键词和术语查询。
+- **来源追溯**：保留文档标题、片段编号和原文字符位置，可从引用打开全文。
+- **两种回答模式**：默认返回原文摘录；配置模型服务后，可生成附带编号引用的综合回答。
+- **异常处理**：零命中提示、模型超时降级、请求体限制和模型并发控制。
+- **检索评测**：提供文档级Recall@3、MRR@3与无关问题零命中率评测。
 
-```bat
-conda activate rag_agent
-cd /d D:\AI_projects\evidencedesk
+## 快速开始
+
+在项目根目录执行（验证环境为Python 3.12）：
+
+```bash
 python -m pip install -r requirements.txt
 python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
-3. 打开 http://127.0.0.1:8000 。按 Ctrl+C 停止。
+浏览器访问 http://127.0.0.1:8000 ，API文档位于 http://127.0.0.1:8000/docs 。Windows用户也可在安装依赖后运行run.bat。默认原文检索不需要模型密钥。
 
-如果没有 `rag_agent` 环境：先运行 `conda create -n evidence_demo python=3.12 -y`，然后 `conda activate evidence_demo`。也可用 Python 3.12 的 `python -m venv .venv`，再执行 `.venv\Scripts\activate`。
+## 使用流程
 
-依赖安装过后可在已激活的环境中运行 `run.bat`。**不要直接双击 web/index.html**，页面通过后端接口加载文档。
+1. 选择内置问题，或添加自己的TXT/Markdown文档。
+2. 输入问题，选择检索策略并提交。
+3. 查看检索结果和右侧证据，点击标题阅读全文。
+4. 如需综合回答，配置模型后开启对应选项并输入访问口令。
 
-## 面试官能看到什么
+内置知识库由自编研究方法说明构成，涉及数据划分、信息泄漏、分类评测及异构图建模，不包含真实患者数据。详细操作见[使用说明](docs/USAGE.md)。
 
-- 左侧：内置知识库、当前会话上传的 TXT / Markdown。
-- 中间：示例问题、独立问题检索、原文摘录或可选模型回答。
-- 右侧：命中文档、块编号、字符位置、检索分数；点击标题查看完整原文。
-- 检索选择：BM25、TF-IDF余弦、RRF融合。
-- 项目与架构面板：真实链路和明确的技术边界。
-- `/docs`：FastAPI 自动生成的接口说明。
+## 模型配置
 
-## 当前已经实现
+通过服务端环境变量配置兼容Chat Completions的HTTPS服务：
 
-| 能力 | 实现 |
+| 变量 | 用途 |
 |---|---|
-| 文本分块 | 最多420字符，重叠80字符，记录原文起止位置 |
-| 中文检索 | 双字片段；英文按词切分 |
-| BM25 | k1=1.5、b=0.75 |
-| TF-IDF | 对数词频、平滑IDF、余弦相似度 |
-| RRF | 两路词法排名融合，k=60 |
-| 文档存储 | SQLite、参数化查询、会话隔离、到期清理 |
-| 回答 | 原文摘录 / 服务端可选模型调用 |
-| 可靠性 | 零命中提示、引用编号范围检查、模型超时降级 |
-| 演示限制 | 请求大小、文档数、全局请求频率、模型并发数限制 |
-| 工程交付 | 测试、评测、Dockerfile、Render配置、GitHub Actions |
+| LLM_BASE_URL | 接口基地址，不含末尾 /chat/completions |
+| LLM_MODEL | 服务商支持的模型名称 |
+| LLM_API_KEY | 服务端调用密钥 |
+| DEMO_ACCESS_TOKEN | 模型回答访问口令；沿用已有变量名 |
+| COOKIE_SECURE | HTTPS部署时设为1，本地HTTP保持0或不设置 |
+| DATA_DIR | SQLite数据库保存目录，默认runtime |
 
-**不宣称已实现：** 语义Embedding、向量数据库、神经重排序、Agent、多轮记忆、生产级用户鉴权。TF-IDF是词法稀疏向量，不是语义向量。引用编号校验也不等于事实一致性验证。
+Windows命令提示符使用 `set 变量名=变量值`，Linux使用 `export 变量名=变量值`，设置后重启服务。`.env.example` 仅用于说明，应用不会自动读取.env。
 
-## 可选：启用大模型回答
+启用模型时，当前问题与检索片段会发送至配置的服务。密钥不得提交到仓库。不同服务商对temperature、max_tokens的支持可能不同，应在配置后验证兼容性。
 
-默认无需模型服务。若希望真正生成综合回答，在启动后端前，在同一个 Anaconda Prompt 设置：
+## 技术架构
 
-```bat
-set LLM_BASE_URL=https://你的服务商地址/v1
-set LLM_MODEL=你的模型名称
-set LLM_API_KEY=你的密钥
-set DEMO_ACCESS_TOKEN=自己生成的长随机口令
-python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
-```
+| 模块 | 实现 |
+|---|---|
+| 前端 | HTML、CSS、原生JavaScript |
+| 接口 | FastAPI、Uvicorn |
+| 存储 | SQLite、会话Cookie |
+| 分块 | 最多420字符，相邻片段重叠80字符 |
+| 切分 | 中文双字片段、英文词 |
+| 检索 | BM25 / TF-IDF / RRF |
+| 模型接入 | HTTPS Chat Completions兼容接口 |
 
-`LLM_BASE_URL` 应为兼容 Chat Completions 的 HTTPS 基地址，不要包含末尾的 `/chat/completions`。实现按常见兼容协议发送 messages、temperature 和 max_tokens；不同服务商可能需要适配参数。`.env.example` 只是说明文件，**程序不会自动加载 .env**。
+完整接口与设计说明见[架构文档](docs/ARCHITECTURE.md)。
 
-页面勾选“使用大模型综合回答”，输入 `DEMO_ACCESS_TOKEN`。API Key只在服务端使用，网页不接收也不保存它。大模型会收到当前问题及命中的文档片段。未提供真实服务凭据，因此交付时只用模拟响应测试了生成分支、权限和失败降级，**未验证真实模型联网回答**。
+## 测试与评测
 
-## 测试和评测
-
-```bat
+```bash
 python -m unittest discover -s tests -v
 python -m app.evaluate
 ```
 
-结果写入 `docs/evaluation_results.json`。当前合成回归集有20个问题：17个正例、3个无关问题，对应8份自编文档；前三篇文档去重后计算Recall@3、MRR@3，无关问题另算零命中率。网页展示前4个片段，评测统计文档级排名，两者口径不同。
+评测结果保存到docs/evaluation_results.json。当前集合包含8份自编文档、17个有相关文档的问题与3个无关问题，用于小规模回归。评测先去重同源片段，再计算前三篇文档的指标；网页返回前四个片段，两者口径不同。
 
-本次三种方法在小集合上Recall@3和MRR@3均为1.0，**这说明题目简单且贴近原文，不说明算法达到真实业务100%准确率，也没有证明融合优于单路**。应扩充同义改写、长文档、冲突材料、多跳问题和难负例，并维护开发集与独立测试集。耗时只是本次环境的小样本结果，不能当作吞吐量或性能承诺。
+该集合规模较小、问题与原文接近，不能用于推断真实业务准确率。当前结果未证明融合检索优于单路策略。模型生成内容的正确性不在这组检索指标的评估范围内。测试范围见[验证记录](docs/VERIFICATION.md)。
 
-## 上传到GitHub
+## 部署
 
-按 [docs/DEPLOY.md](docs/DEPLOY.md) 操作。推荐仓库名 `evidencedesk`。
+提供Dockerfile和render.yaml。构建容器：
 
-仓库首页应保留本README、真实评测结果和后续开发记录；部署成功后再补上真实的在线体验地址。不要写虚构用户数、性能提升、实习项目来源或上线经验。
+```bash
+docker build -t evidencedesk .
+docker run --rm -p 8000:8000 evidencedesk
+```
+
+托管平台启动命令：
+
+```bash
+python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT
+```
+
+配置细节见[部署文档](docs/DEPLOY.md)。需要保留上传记录时，应使用可写持久存储。平台临时磁盘可能在重启、休眠或重新部署时清空。
 
 ## 项目结构
 
-```text
-evidencedesk/
-  app/main.py          # FastAPI接口、调用控制、模型回答
-  app/retrieval.py     # 分块、BM25、TF-IDF、RRF
-  app/store.py         # SQLite文档存储和隔离
-  app/evaluate.py      # 文档级检索评测
-  web/                # 原生HTML、CSS、JavaScript
-  data/               # 自编材料和合成评测问题
-  tests/              # 自动化功能测试
-  docs/               # 架构、部署、面试演示、验证记录
-  .github/workflows/   # CI测试与评测
-  Dockerfile
-  render.yaml
-  requirements.txt
-```
+| 目录 | 内容 |
+|---|---|
+| app/ | 接口、存储、检索与评测 |
+| web/ | 网页界面及交互 |
+| data/ | 内置文档和评测问题 |
+| tests/ | 自动化测试 |
+| docs/ | 使用、架构、部署与验证说明 |
 
-## 局限与下一步
+## 当前限制
 
-- 索引在请求时重建，适合小规模展示；大规模文档需缓存或独立检索服务。
-- 词法检索对同义改写、语义推理、无关键词匹配的提问较弱。
-- 文件格式仅TXT/Markdown，尚无PDF/OCR解析。
-- 每次提问独立检索，界面历史不作为模型多轮上下文。
-- Cookie会话用于演示隔离，不是账号系统；无长期会话恢复。
-- 文档在服务器保存最多24小时，下一次数据库操作才触发删除；临时磁盘重启也会丢失。
-- 请求频率限制为单进程演示级控制，部署建议单worker；生产环境应使用统一网关、身份鉴权、持久化限流及日志监控。
-- 检索分数不表示置信度；只能对零命中做明确提示，非零命中仍可能不能回答问题。
-
-参考：FastAPI测试 https://fastapi.tiangolo.com/tutorial/testing/ ；Render部署 https://render.com/docs/deploy-fastapi 。
+- 目前是词法检索；TF-IDF不是语义Embedding，尚未接入语义召回或神经重排序。
+- 每次提问独立处理，页面历史不会作为模型的多轮上下文。
+- 文档格式限TXT/Markdown；每会话最多5份，每份最多50000字符。
+- 上传记录满24小时后在下一次数据库操作时清理；Cookie会话不提供账号登录或长期恢复。
+- 索引在请求时构建，适合小规模知识库。大量文档需要增量索引及检索服务。
+- 限流为单进程全局控制，不能替代生产环境的身份鉴权、网关和配额管理。
+- 引用编号校验只检查编号是否有效，不保证生成内容忠实于证据；检索分数也不是置信度。
