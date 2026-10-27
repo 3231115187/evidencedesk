@@ -1,0 +1,622 @@
+{
+  "scope": "20 synthetic cases, 8 self-authored documents; regression only; not production accuracy",
+  "positive_cases": 17,
+  "negative_cases": 3,
+  "results": [
+    {
+      "method": "bm25",
+      "recall_at_3": 1.0,
+      "mrr_at_3": 1.0,
+      "negative_zero_hit_rate": 1.0,
+      "mean_retrieval_ms": 1.204,
+      "details": [
+        {
+          "question": "怎样避免同一患者同时进入训练集和测试集？",
+          "expected": [
+            "split"
+          ],
+          "retrieved": [
+            "split",
+            "graph",
+            "eval"
+          ]
+        },
+        {
+          "question": "标准化和缺失值填补应该在哪个集合拟合？",
+          "expected": [
+            "split"
+          ],
+          "retrieved": [
+            "split",
+            "metric",
+            "eval"
+          ]
+        },
+        {
+          "question": "为什么不能使用出院诊断作为输入？",
+          "expected": [
+            "leak"
+          ],
+          "retrieved": [
+            "leak",
+            "ops",
+            "rag"
+          ]
+        },
+        {
+          "question": "预测时点之后的药物记录可以使用吗？",
+          "expected": [
+            "leak"
+          ],
+          "retrieved": [
+            "leak",
+            "metric",
+            "graph"
+          ]
+        },
+        {
+          "question": "Macro-F1和Micro-F1有什么区别？",
+          "expected": [
+            "metric"
+          ],
+          "retrieved": [
+            "metric"
+          ]
+        },
+        {
+          "question": "AUROC与AUPRC需要什么输入？",
+          "expected": [
+            "metric"
+          ],
+          "retrieved": [
+            "metric",
+            "ops",
+            "leak"
+          ]
+        },
+        {
+          "question": "公开演示可以上传真实病历吗？",
+          "expected": [
+            "privacy"
+          ],
+          "retrieved": [
+            "privacy",
+            "ops",
+            "leak"
+          ]
+        },
+        {
+          "question": "上传文档保留多长时间？",
+          "expected": [
+            "privacy"
+          ],
+          "retrieved": [
+            "privacy",
+            "rag",
+            "eval"
+          ]
+        },
+        {
+          "question": "异构图包含哪些节点？",
+          "expected": [
+            "graph"
+          ],
+          "retrieved": [
+            "graph",
+            "privacy"
+          ]
+        },
+        {
+          "question": "归纳评测和传导设置需要区分吗？",
+          "expected": [
+            "graph"
+          ],
+          "retrieved": [
+            "graph",
+            "metric",
+            "ops"
+          ]
+        },
+        {
+          "question": "默认分块大小和重叠是多少？",
+          "expected": [
+            "rag"
+          ],
+          "retrieved": [
+            "rag",
+            "ops"
+          ]
+        },
+        {
+          "question": "TF-IDF是语义向量吗？",
+          "expected": [
+            "rag"
+          ],
+          "retrieved": [
+            "rag",
+            "eval"
+          ]
+        },
+        {
+          "question": "Recall@3和MRR@3是什么意思？",
+          "expected": [
+            "eval"
+          ],
+          "retrieved": [
+            "eval"
+          ]
+        },
+        {
+          "question": "评测集能证明真实业务效果吗？",
+          "expected": [
+            "eval"
+          ],
+          "retrieved": [
+            "eval",
+            "metric",
+            "graph"
+          ]
+        },
+        {
+          "question": "模型密钥应该放在哪里？",
+          "expected": [
+            "ops"
+          ],
+          "retrieved": [
+            "ops",
+            "rag",
+            "leak"
+          ]
+        },
+        {
+          "question": "模型调用失败会怎样？",
+          "expected": [
+            "ops"
+          ],
+          "retrieved": [
+            "ops",
+            "rag",
+            "leak"
+          ]
+        },
+        {
+          "question": "如何防止患者重复和预处理泄漏？",
+          "expected": [
+            "split",
+            "leak"
+          ],
+          "retrieved": [
+            "leak",
+            "graph",
+            "split"
+          ]
+        },
+        {
+          "question": "今天天气怎么样？",
+          "expected": [],
+          "retrieved": []
+        },
+        {
+          "question": "火星飞船推进器燃料配比",
+          "expected": [],
+          "retrieved": []
+        },
+        {
+          "question": "xyzqwerty987654",
+          "expected": [],
+          "retrieved": []
+        }
+      ]
+    },
+    {
+      "method": "tfidf",
+      "recall_at_3": 1.0,
+      "mrr_at_3": 1.0,
+      "negative_zero_hit_rate": 1.0,
+      "mean_retrieval_ms": 1.035,
+      "details": [
+        {
+          "question": "怎样避免同一患者同时进入训练集和测试集？",
+          "expected": [
+            "split"
+          ],
+          "retrieved": [
+            "split",
+            "graph",
+            "eval"
+          ]
+        },
+        {
+          "question": "标准化和缺失值填补应该在哪个集合拟合？",
+          "expected": [
+            "split"
+          ],
+          "retrieved": [
+            "split",
+            "metric",
+            "eval"
+          ]
+        },
+        {
+          "question": "为什么不能使用出院诊断作为输入？",
+          "expected": [
+            "leak"
+          ],
+          "retrieved": [
+            "leak",
+            "ops",
+            "rag"
+          ]
+        },
+        {
+          "question": "预测时点之后的药物记录可以使用吗？",
+          "expected": [
+            "leak"
+          ],
+          "retrieved": [
+            "leak",
+            "metric",
+            "graph"
+          ]
+        },
+        {
+          "question": "Macro-F1和Micro-F1有什么区别？",
+          "expected": [
+            "metric"
+          ],
+          "retrieved": [
+            "metric"
+          ]
+        },
+        {
+          "question": "AUROC与AUPRC需要什么输入？",
+          "expected": [
+            "metric"
+          ],
+          "retrieved": [
+            "metric",
+            "ops",
+            "leak"
+          ]
+        },
+        {
+          "question": "公开演示可以上传真实病历吗？",
+          "expected": [
+            "privacy"
+          ],
+          "retrieved": [
+            "privacy",
+            "ops",
+            "leak"
+          ]
+        },
+        {
+          "question": "上传文档保留多长时间？",
+          "expected": [
+            "privacy"
+          ],
+          "retrieved": [
+            "privacy",
+            "eval",
+            "rag"
+          ]
+        },
+        {
+          "question": "异构图包含哪些节点？",
+          "expected": [
+            "graph"
+          ],
+          "retrieved": [
+            "graph",
+            "privacy"
+          ]
+        },
+        {
+          "question": "归纳评测和传导设置需要区分吗？",
+          "expected": [
+            "graph"
+          ],
+          "retrieved": [
+            "graph",
+            "ops",
+            "metric"
+          ]
+        },
+        {
+          "question": "默认分块大小和重叠是多少？",
+          "expected": [
+            "rag"
+          ],
+          "retrieved": [
+            "rag",
+            "ops"
+          ]
+        },
+        {
+          "question": "TF-IDF是语义向量吗？",
+          "expected": [
+            "rag"
+          ],
+          "retrieved": [
+            "rag",
+            "eval"
+          ]
+        },
+        {
+          "question": "Recall@3和MRR@3是什么意思？",
+          "expected": [
+            "eval"
+          ],
+          "retrieved": [
+            "eval"
+          ]
+        },
+        {
+          "question": "评测集能证明真实业务效果吗？",
+          "expected": [
+            "eval"
+          ],
+          "retrieved": [
+            "eval",
+            "metric",
+            "graph"
+          ]
+        },
+        {
+          "question": "模型密钥应该放在哪里？",
+          "expected": [
+            "ops"
+          ],
+          "retrieved": [
+            "ops",
+            "rag",
+            "leak"
+          ]
+        },
+        {
+          "question": "模型调用失败会怎样？",
+          "expected": [
+            "ops"
+          ],
+          "retrieved": [
+            "ops",
+            "rag",
+            "leak"
+          ]
+        },
+        {
+          "question": "如何防止患者重复和预处理泄漏？",
+          "expected": [
+            "split",
+            "leak"
+          ],
+          "retrieved": [
+            "leak",
+            "graph",
+            "split"
+          ]
+        },
+        {
+          "question": "今天天气怎么样？",
+          "expected": [],
+          "retrieved": []
+        },
+        {
+          "question": "火星飞船推进器燃料配比",
+          "expected": [],
+          "retrieved": []
+        },
+        {
+          "question": "xyzqwerty987654",
+          "expected": [],
+          "retrieved": []
+        }
+      ]
+    },
+    {
+      "method": "hybrid",
+      "recall_at_3": 1.0,
+      "mrr_at_3": 1.0,
+      "negative_zero_hit_rate": 1.0,
+      "mean_retrieval_ms": 1.018,
+      "details": [
+        {
+          "question": "怎样避免同一患者同时进入训练集和测试集？",
+          "expected": [
+            "split"
+          ],
+          "retrieved": [
+            "split",
+            "graph",
+            "eval"
+          ]
+        },
+        {
+          "question": "标准化和缺失值填补应该在哪个集合拟合？",
+          "expected": [
+            "split"
+          ],
+          "retrieved": [
+            "split",
+            "metric",
+            "eval"
+          ]
+        },
+        {
+          "question": "为什么不能使用出院诊断作为输入？",
+          "expected": [
+            "leak"
+          ],
+          "retrieved": [
+            "leak",
+            "ops",
+            "rag"
+          ]
+        },
+        {
+          "question": "预测时点之后的药物记录可以使用吗？",
+          "expected": [
+            "leak"
+          ],
+          "retrieved": [
+            "leak",
+            "metric",
+            "graph"
+          ]
+        },
+        {
+          "question": "Macro-F1和Micro-F1有什么区别？",
+          "expected": [
+            "metric"
+          ],
+          "retrieved": [
+            "metric"
+          ]
+        },
+        {
+          "question": "AUROC与AUPRC需要什么输入？",
+          "expected": [
+            "metric"
+          ],
+          "retrieved": [
+            "metric",
+            "ops",
+            "leak"
+          ]
+        },
+        {
+          "question": "公开演示可以上传真实病历吗？",
+          "expected": [
+            "privacy"
+          ],
+          "retrieved": [
+            "privacy",
+            "ops",
+            "leak"
+          ]
+        },
+        {
+          "question": "上传文档保留多长时间？",
+          "expected": [
+            "privacy"
+          ],
+          "retrieved": [
+            "privacy",
+            "rag",
+            "eval"
+          ]
+        },
+        {
+          "question": "异构图包含哪些节点？",
+          "expected": [
+            "graph"
+          ],
+          "retrieved": [
+            "graph",
+            "privacy"
+          ]
+        },
+        {
+          "question": "归纳评测和传导设置需要区分吗？",
+          "expected": [
+            "graph"
+          ],
+          "retrieved": [
+            "graph",
+            "metric",
+            "ops"
+          ]
+        },
+        {
+          "question": "默认分块大小和重叠是多少？",
+          "expected": [
+            "rag"
+          ],
+          "retrieved": [
+            "rag",
+            "ops"
+          ]
+        },
+        {
+          "question": "TF-IDF是语义向量吗？",
+          "expected": [
+            "rag"
+          ],
+          "retrieved": [
+            "rag",
+            "eval"
+          ]
+        },
+        {
+          "question": "Recall@3和MRR@3是什么意思？",
+          "expected": [
+            "eval"
+          ],
+          "retrieved": [
+            "eval"
+          ]
+        },
+        {
+          "question": "评测集能证明真实业务效果吗？",
+          "expected": [
+            "eval"
+          ],
+          "retrieved": [
+            "eval",
+            "metric",
+            "graph"
+          ]
+        },
+        {
+          "question": "模型密钥应该放在哪里？",
+          "expected": [
+            "ops"
+          ],
+          "retrieved": [
+            "ops",
+            "rag",
+            "leak"
+          ]
+        },
+        {
+          "question": "模型调用失败会怎样？",
+          "expected": [
+            "ops"
+          ],
+          "retrieved": [
+            "ops",
+            "rag",
+            "leak"
+          ]
+        },
+        {
+          "question": "如何防止患者重复和预处理泄漏？",
+          "expected": [
+            "split",
+            "leak"
+          ],
+          "retrieved": [
+            "leak",
+            "graph",
+            "split"
+          ]
+        },
+        {
+          "question": "今天天气怎么样？",
+          "expected": [],
+          "retrieved": []
+        },
+        {
+          "question": "火星飞船推进器燃料配比",
+          "expected": [],
+          "retrieved": []
+        },
+        {
+          "question": "xyzqwerty987654",
+          "expected": [],
+          "retrieved": []
+        }
+      ]
+    }
+  ]
+}

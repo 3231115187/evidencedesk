@@ -1,0 +1,117 @@
+[
+  {
+    "question": "怎样避免同一患者同时进入训练集和测试集？",
+    "relevant": [
+      "split"
+    ]
+  },
+  {
+    "question": "标准化和缺失值填补应该在哪个集合拟合？",
+    "relevant": [
+      "split"
+    ]
+  },
+  {
+    "question": "为什么不能使用出院诊断作为输入？",
+    "relevant": [
+      "leak"
+    ]
+  },
+  {
+    "question": "预测时点之后的药物记录可以使用吗？",
+    "relevant": [
+      "leak"
+    ]
+  },
+  {
+    "question": "Macro-F1和Micro-F1有什么区别？",
+    "relevant": [
+      "metric"
+    ]
+  },
+  {
+    "question": "AUROC与AUPRC需要什么输入？",
+    "relevant": [
+      "metric"
+    ]
+  },
+  {
+    "question": "公开演示可以上传真实病历吗？",
+    "relevant": [
+      "privacy"
+    ]
+  },
+  {
+    "question": "上传文档保留多长时间？",
+    "relevant": [
+      "privacy"
+    ]
+  },
+  {
+    "question": "异构图包含哪些节点？",
+    "relevant": [
+      "graph"
+    ]
+  },
+  {
+    "question": "归纳评测和传导设置需要区分吗？",
+    "relevant": [
+      "graph"
+    ]
+  },
+  {
+    "question": "默认分块大小和重叠是多少？",
+    "relevant": [
+      "rag"
+    ]
+  },
+  {
+    "question": "TF-IDF是语义向量吗？",
+    "relevant": [
+      "rag"
+    ]
+  },
+  {
+    "question": "Recall@3和MRR@3是什么意思？",
+    "relevant": [
+      "eval"
+    ]
+  },
+  {
+    "question": "评测集能证明真实业务效果吗？",
+    "relevant": [
+      "eval"
+    ]
+  },
+  {
+    "question": "模型密钥应该放在哪里？",
+    "relevant": [
+      "ops"
+    ]
+  },
+  {
+    "question": "模型调用失败会怎样？",
+    "relevant": [
+      "ops"
+    ]
+  },
+  {
+    "question": "如何防止患者重复和预处理泄漏？",
+    "relevant": [
+      "split",
+      "leak"
+    ]
+  },
+  {
+    "question": "今天天气怎么样？",
+    "relevant": []
+  },
+  {
+    "question": "火星飞船推进器燃料配比",
+    "relevant": []
+  },
+  {
+    "question": "xyzqwerty987654",
+    "relevant": []
+  }
+]
